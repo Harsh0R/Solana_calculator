@@ -9,23 +9,28 @@ describe("helloword_calculator", () => {
 
   const program = anchor.workspace.HellowordCalculator as Program<HellowordCalculator>;
 
-  const programProvider = program.provider as anchor.AnchorProvider;
+  const provider = anchor.AnchorProvider.env()
 
+  // const programProvider = program.provider as anchor.AnchorProvider;
   const calculatorKeyPair = anchor.web3.Keypair.generate();
 
   const text = "This is my solana calculator"
 
+  console.log("Programm ====>>>> " , program);
+  
+
   it("Is initialized!", async () => {
     // Add your test here.
-    // const tx = await program.methods.create(text).accounts({
-    //   calculator: calculatorKeyPair.publicKey,
-    //   user: programProvider.wallet.publicKey,
-    //   systemProgram: anchor.web3.SystemProgram.programId
-    // }).signer([calculatorKeyPair]).rpc();
-    // console.log("Your transaction signature", tx);
 
-    // const account = await program.account.calculator.fetch(calculatorKeyPair.publicKey)
-    // expect(account.greeting).to.eql(text)
+    const tx = await program.methods.create(text).accounts({
+      calculator: calculatorKeyPair.publicKey,
+      user: provider.wallet.publicKey,
+      systemProgram: anchor.web3.SystemProgram.programId
+    }).signer([calculatorKeyPair]).rpc();
+    console.log("Your transaction signature", tx);
+
+    const account = await program.account.calculator.fetch(calculatorKeyPair.publicKey)
+    expect(account.greeting).to.eql(text)
 
   });
 

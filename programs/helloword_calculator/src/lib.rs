@@ -17,11 +17,11 @@ pub mod helloword_calculator {
         Ok(())
     }
 
-    pub fn add(ctx: Context<Addition> , x:i128 , y:i128) -> ProgramResult{
-        let calculator = &mut ctx.accounts.calculator;
-        calculator.result = x+y;
-        Ok(())
-    }
+    // pub fn add(ctx: Context<Addition> , x:i128 , y:i128) -> ProgramResult{
+    //     let calculator = &mut ctx.accounts.calculator;
+    //     calculator.result = x+y;
+    //     Ok(())
+    // }
 
 
 
@@ -38,11 +38,11 @@ pub struct Create<'info> {
     pub system_program:Program<'info , System>,    
 }
 
-#[derive(Accounts)]
-pub struct Addition<'info>{
-    #[account(mut)]
-    pub calculator:Account<'info , Calculator>,
-}
+// #[derive(Accounts)]
+// pub struct Addition<'info>{
+//     #[account(mut)]
+//     pub calculator:Account<'info , Calculator>,
+// }
 
 #[account]
 pub struct Calculator{
